@@ -221,7 +221,7 @@ def stat():
 			st.balloons()
 			st.subheader('Congratulation You have been selected! Please Contact with our admin office at Kumira Campus')
 		elif(size!=0 and table[0][1]=='Rejected'):
-			st.markdown("<h3 style='color: OrangeRed;'>Sorry!! We couldn't select you due for valid reason</h3>",unsafe_allow_html=True)
+			st.markdown("<h3 style='color: OrangeRed;'>Sorry!! We couldn't select you for valid reason</h3>",unsafe_allow_html=True)
 		elif(size!=0 and table[0][1]=='In Progress'):
 			st.info("Please visit again later we are still validating")
 
