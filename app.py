@@ -66,7 +66,7 @@ cursor, db = get_database_connection()
 #                                               status varchar(255))''')
 cursor.execute("Select * from KOTA")
 tables = cursor.fetchall()
-# st.write(tables)
+st.write(tables)
 
 def admin():
     username=st.sidebar.text_input("Username",key='user')
@@ -88,7 +88,7 @@ def admin():
             # st.write(tables)
             st.write("")
             st.write("")
-            st.markdown("<h1 style='text-align:center;color:DarkTurquoise;'>List of Students Registered in this time period</h1>",unsafe_allow_html=True)
+            st.markdown("<h2 style='text-align:center;color:DarkTurquoise;'>List of Students Registered in this time period</h2>",unsafe_allow_html=True)
             st.write("")
             st.write("")
             with st.container():
