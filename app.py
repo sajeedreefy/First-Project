@@ -25,8 +25,8 @@ import yaml
 from db_connection import get_database_connection
 
 st.set_page_config(
-    page_title="Admission Form",
-    page_icon=":sunny:",
+    page_title="IIUC Data Science Admission Form",
+    page_icon=":book:",
     # layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -66,7 +66,7 @@ cursor, db = get_database_connection()
 #                                               status varchar(255))''')
 cursor.execute("Select * from KOTA")
 tables = cursor.fetchall()
-# st.write(tables)
+#st.write(tables)
 
 def admin():
     username=st.sidebar.text_input("Username",key='user')
