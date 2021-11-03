@@ -66,7 +66,7 @@ cursor, db = get_database_connection()
 #                                               status varchar(255))''')
 cursor.execute("Select * from KOTA")
 tables = cursor.fetchall()
-st.write(tables)
+# st.write(tables)
 
 def admin():
     username=st.sidebar.text_input("Username",key='user')
