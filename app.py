@@ -123,16 +123,16 @@ def form():
 	id=uuid4()
 	id=str(id)[:5]
 	with st.form(key='member form'):
-		sname=st.text_input('Student Name')
-		s1name=st.text_input("Mother's Name")
-		s2name=st.text_input("Father's Name")
+		sname=st.text_input("Student Name",max_chars=50)
+		s1name=st.text_input("Mother's Name",max_chars=50)
+		s2name=st.text_input("Father's Name",max_chars=50)
 		with st.container():
 			col_1,col_2=st.columns((1,1))
 			gen_name=col_1.selectbox("Gender",['Choose','Male','Female','Other'])
 			Blood_group=col_2.selectbox('Blood Group',['Choose','O+','O-','A+','A-','AB+','AB-','B+','B-'])
 		with st.container():
 			c1,c2=st.columns((1,1))
-			ph_num=c1.text_input('Number')
+			ph_num=c1.text_input('Number',max_chars=11)
 			email_n=c2.text_input('Email')
 		Rel=st.selectbox('Religion',['Select Option','Islam','Hinduism','Buddhist','Christianity','Others'])
 		nation=st.text_input('Nationality')
@@ -151,7 +151,7 @@ def form():
 				c1,c2=st.columns((1.5,1))
 				c1.markdown("<h4 style='color:Silver;'>Here is your Unique ID :</h4>",unsafe_allow_html=True)
 				c2.code(id)
-				st.warning("Please Store your **UNIQUE ID**!!")
+				st.warning("Please Store your **UNIQUE ID**!! You can track your current status using this code")
         
 def info():
 	st.markdown("<h1 style='text-align: center;color: MediumSeaGreen;'>Applicant's Information Panel</h1>",unsafe_allow_html=True)
