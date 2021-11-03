@@ -66,7 +66,7 @@ cursor, db = get_database_connection()
 #                                               status varchar(255))''')
 cursor.execute("Select * from KOTA")
 tables = cursor.fetchall()
-st.write(tables)
+# st.write(tables)
 
 def admin():
     username=st.sidebar.text_input("Username",key='user')
@@ -76,26 +76,38 @@ def admin():
     if st.session_state.login==True:
         if username=="sajeedreefy" and password=='123korlataki':
             st.sidebar.success('Login Successful')
-            # st.
-            date1=st.date_input('Date1')
-            date2=st.date_input('Date2')
+            st.markdown("<h1 style='text-align:center;color:RoyalBlue;'>IIUC Admin Panel</h1>",unsafe_allow_html=True)
+            st.write("")
+            st.write("")
+            st.markdown("<h3 style='text-align:center;color:Snow;'>Choose the time period for registered applicants</h3>",unsafe_allow_html=True)
+            date1=st.date_input('From')
+            date2=st.date_input('To')
             cursor.execute(f"select * from KOTA where reg_date between '{date1}' and '{date2}' and status='In Progress'")
             # db.commit()
             tables =cursor.fetchall()
             # st.write(tables)
+            st.write("")
+            st.write("")
+            st.markdown("<h1 style='text-align:center;color:DarkTurquoise;'>List of Students Registered in this time period</h1>",unsafe_allow_html=True)
+            st.write("")
+            st.write("")
             with st.container():
             	for i in tables:
-            		st.write(i[1])
-            		st.write(i[2])
+            		with st.container():
+            			col1,col2=st.columns((.5,1))
+            			col1.subheader("**Student Name: **")
+            			col2.subheader(i[1])
+            			col1.subheader("**Phone Number: **")
+            			col2.subheader(i[5])
             		Accept=st.button('Accept',key=i[0])
             		Reject=st.button('Reject',key=i[0])
             		if Accept:
-            			st.write('Accepted')
+            			st.success('Applicant has been Accepted')
             			query=f"Update KOTA set status='Accepted' where id='{i[0]}'"
             			cursor.execute(query)
             			db.commit()
             		elif Reject:
-            			st.write('Rejected')
+            			st.warning('Applican has been Rejected')
             			cursor.execute(f"Update KOTA set status='Rejected' where id='{i[0]}'")
             			db.commit()
         elif(username=="sajeedreefy" and password!='123korlataki'):
@@ -148,7 +160,7 @@ def info():
 	if Submit:
 		cursor.execute(f"select * from KOTA where id='{id}'")
 		tables = cursor.fetchall()
-		st.write(tables)
+		# st.write(tables)
 		size=len(tables)
 		if(size==0):
 			st.error('Your ID is not correct, Try Again')
@@ -186,32 +198,32 @@ def info():
 
 
 def stat():
-
-    id=st.text_input('Search Your ID')
-    submit=st.button('Search',key='sub')
-    if submit:
-        cursor.execute(f"Select st_name,status from KOTA where id='{id}'")
-        table=cursor.fetchall()
-        st.write(table)
-        size=len(table)
-        if(size==0):
-        	st.error("Incorrect ID")
-        else:
-        	with st.container():
-        		c1,c2,c3=st.columns((2.3,1,1))
-        		c1.subheader(f"{table[0][0]}'s current status is ")
-        		if(table[0][1]=='Accepted'):
-        			c2.success('Accepted')
-        		elif(table[0][1]=='Rejected'):
-        			c2.error('Rejected')
-        		else:
-        			c2.warning(f"In Progress")
-        if(size!=0 and table[0][1]=='Accepted'):
-        	st.subheader('Congratulation You have been selected! Please Contact with our admin office at Kumira Campus')
-        elif(size!=0 and table[0][1]=='Rejected'):
-        	st.markdown("<h3 style='color: OrangeRed;'>Sorry!! We couldn't select you due for valid reason</h3>",unsafe_allow_html=True)
-        elif(size!=0 and table[0][1]=='In Progress'):
-        	st.info("Please visit again later we are still validating")
+	st.markdown("<h2 style='text-align: center;color: IndianRed;'>Applicant's Status Bar</h2>",unsafe_allow_html=True)
+	id=st.text_input('Search Your Unique ID')
+	submit=st.button('Search',key='sub')
+	if submit:
+		cursor.execute(f"Select st_name,status from KOTA where id='{id}'")
+		table=cursor.fetchall()
+		size=len(table)
+		if(size==0):
+			st.error("Incorrect ID")
+		else:
+			with st.container():
+				c1,c2,c3=st.columns((2.3,1,1))
+				c1.subheader(f"{table[0][0]}'s current status is ")
+				if(table[0][1]=='Accepted'):
+					c2.success('Accepted')
+				elif(table[0][1]=='Rejected'):
+					c2.error('Rejected')
+				else:
+					c2.warning(f"In Progress")
+		if(size!=0 and table[0][1]=='Accepted'):
+			st.balloons()
+			st.subheader('Congratulation You have been selected! Please Contact with our admin office at Kumira Campus')
+		elif(size!=0 and table[0][1]=='Rejected'):
+			st.markdown("<h3 style='color: OrangeRed;'>Sorry!! We couldn't select you due for valid reason</h3>",unsafe_allow_html=True)
+		elif(size!=0 and table[0][1]=='In Progress'):
+			st.info("Please visit again later we are still validating")
 
 
 
