@@ -249,7 +249,7 @@ def main():
     elif selected=='Status':
         stat()
     else:
-    	st.markdown("<h1 style='text-align: center; color: Tomato;'>Admission Form of Masters in Data Science</h1>", unsafe_allow_html=True)
+    	st.markdown("<h1 style='text-align: center; color: DodgerBlue;'>Admission Form of Masters in Data Science</h1>", unsafe_allow_html=True)
     	st.markdown("<h3 style='text-align: center; color: Forestgreen;'>International Islamic University Chittagong</h3>",unsafe_allow_html=True)
 if __name__=='__main__':
     main()
